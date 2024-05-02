@@ -194,9 +194,77 @@ No está orientado a la conexión y no hay establecimiento de sesión.
 La cabecera es de 8 bytes para ser más ligero. Aun así tiene un checksum.  
 
 ### Números de puerto
+Utilidad: Multiples conversaciones simultaneas.  
+Socket: Es la combinación de IP y puerto origen e IP y puerto destino. Permite diferenciar procesos en una máquina y conexiones en un servidor.  
+Rangos de puertos:  
+Puertos bien conocidos: 0 - 1023. Para servicios y protocolos bien conocidos.  
+Puertos registrados: 1024 - 49151. Puertos registrados en la IANA por empresas.  
+Puertos privados y/o Dinámicos: del 49,152 al 65,535. El resto de puertos libres para uso privado.  
+El comando netstat permite ver las conexiones actuales de TCP y UDP.  
 
+### Sesiones TCP
+En un servidor cada proceso ocupa un número de puerto ,no puede haber un puerto con dos servicios
+Establecimiento de una conexión tcp:  
+Una máquina manda a otra una solicitud SYN.  
+La otra máquina manda una respuesta ACK y manda un SYN.  
+La primera máquina manda una respuesta ACK.  
+Para finalizar es lo mismo pero con una solicitud FIN.  
+Esto se conoce como protocolo three way handshake.  
+Los mensajes mandados TCP pueden ser: URG, ACK, PSH, RST, SYN, FIN.  
 
+### Confiabilidad y control de flujo
+TCP garantiza la entrega ordenada de los segmentos.  
+TCP garantiza que ante una pérdida de datos estos serán retransmitidos.  
+TCP proporciona herramientas de control de flujo para no mandar datos más rápido de lo que la otra máquina puede aguantar.  
+MSS(Maximum Segment Size) en IPv4 suele ser 1460.  
 
+### Comunicación UDP
+UDP no establece conexión, tiene poca sobrecarga por el tamaño del encabezado, no reordena los paquetes recibidos.  
+
+### Principios de la redes inalámbricas
+### Tecnologías inalámbricas
+Bluetooth: Estándar IEEE 802.15.1 WPAN utilizado para emparejar dispositivos a una distancia de hasta 100m.  
+WiMAX: Proporciona enlaces alternativos a internet. Estándar IEEE 802.16 WMAN para distancias de hasta 50km.  
+Banda ancha celular: 4G, 5G.  
+Banda ancha satelital: Antena parabólica direccional.  
+WLAN: 2.4 GHz (UHF) - 802.11 b/g/n/ax, 5 GHz (SHF) – 802.11 a/n/ac/ax.  
+
+### Componentes de una WLAN
+NICs inalámbricas.  
+Routers de hogar inalámbricos.  
+AP autonomo, AP basado en controlador o LAP. Los LAP usan LWAPP para comunicarse con un WLC. Un WLC sirve para configurar automáticamente los AP.  
+Antenas: Omnidireccionales, direccionales, MIMO.  
+
+### Funcionamiento de una WLAN
+Topologías:  
+Modo ad hoc: Dispositivo a dispositivo. IBSS.  
+Modo infraestructura: Conexión a AP. BSS o ESS.  
+Tethering: Un dispositivo comparte conexión haciendo de AP.  
+Las WLAN son half-duplex y no pueden mandar y recibir a la vez por lo que no pueden detectar colisiones. Por esta razón se utiliza CSMA/CA.  
+
+### CAPWAP
+CAPWAP es el protocolo que utilizan los WLC para administrar varios AP, está basado en LWAPP y se cifra con DLTS.  
+Los tuneles CAPWAP son las conexiones del WLC a los AP.  
+
+### Gestión de canales
+DSSS - Direct-Sequence Spread Spectrum.  
+FHSS - Frequency-Hopping Spread Spectrum.  
+OFDM - Orthogonal Frequency-Division Multiplexing.  
+Sección de canales 2,4GHz:
+La banda de 2,4 GHz se subdivide en múltiples canales, cada uno de los cuales tiene un ancho de banda de 22 MHz y se separa del siguiente canal en 5 MHz.  
+Cuando se necesitan múltiples APs 802.11b/g en la misma zona se recomienda utilizar canales no superpuestos, como los números 1, 6 y 11.  
+Sección de canales 5 GH:  
+En los estándares de 5 GHz 802.11a/n/ac, hay 24 canales.  
+Cada canal está separado del siguiente canal por 20MHz.  
+Los canales no superpuestos son 36, 48 y 60 en el caso de canales de 20MHz.  
+
+### Seguridad en las WLANs
+Técnicas de seguridad básicas pero efectivas: Ocultación de SSID, filtrado de direcciones MAC.  
+Autenticación abierta: No se requiere contraseña.  
+Autenticación de clave compartida: WEP, WPA, WPA2 y WPA3.  
+
+### Principios de virtualización
+### Computación en la nube
 
 
 
