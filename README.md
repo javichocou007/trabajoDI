@@ -265,6 +265,431 @@ Autenticación de clave compartida: WEP, WPA, WPA2 y WPA3.
 
 ### Principios de virtualización
 ### Computación en la nube
+La computación en la nube resuelve algunos problemas administrativos: Elimina o reduce equipos de TI, reduce el costo de equipamiento, energía y refrigeración.  
+Servicios principales:   
+Software como un Servicio (SaaS): Office 365, Wordpress.  
+Plataforma como un Servicio (PaaS): Google App Engine.  
+Infraestructura como un Servicio (IaaS): Azure, AWS.  
+Tipos de nubes: públicas, privadas, híbridas, comunitarias.  
+Centro de datos: Procesamiento y almacenamiento de datos.  
+Computación en la nube: recursos de computación compartidos.  
+
+### Vitualización
+Con la virtualización en vez de tener un servidor para cada función, un servidor puede tener varios OSs. Con esto se evita tener un unto único de fallo, tener muchos servidores y malgastar recursos.  
+El Hypervisor proporciona una capa de abstracción frente al hardware físico real y permiten tener varias instancias de OSs.  
+
+### Hypervisores
+Tipos: Tipo 1(Bare-metal), tipo 2(Hypervisor alojado).  
+Las de tipo 1 se instalan directamente en el hardware, son más eficientes, necesita una consola de administración.  
+Los de tipo 2 son programas como: VirtualBOX, VMWare Professional, VirtualPC, VMWare Fusion.  
+
+### Virtualización de servicios de red
+En una arquitectura virtualizada las VMs son trasladables y se usan switches virtualizados para simplificar el trabajo.  
+Hay dos tipos de flujo en  una arquitectura virtualizada: Tráfico Este-Oeste, Tráfico Norte-Sur.  
+Mediante técnicas de virtualización se puede implementar: Subinterfaces, Interfaces virtuales, VLAN, VRFs.  
+
+### Conceptos de conmutación
+### Estructura de una trama ethernet
+Ethernet está definido en dos estándares de la IEEE:  
+IEEE 802.2: implementa la subcapa LLC.  
+IEEE 802.3: Implementa la subcapa MAC y la capa física.  
+La subcapa MAC es responsable de: encapsulamiento de datos, trama de Ethernet, direccionamiento Ethernet, detección de errores Ethernet, acceso a los medios.  
+
+### Direccionamiento MAC
+Una dirección MAC tiene 48 bits o 12 dígitos hexadecimales, los 24 primeros son el OUI(Organizationally unique identifier), los 24 restantes los asigna el fabricante.  
+Una dirección MAC tiene que ser única de una NIC.  
+Tipos de direcciones MAC: unidifusión, multidifusión, difusión.  
+Las de unidifusión se usan como unicast y para ARP(Address Resolution Protocol) y ND(Neighbor Discovery).  
+Las de difusión se mandan a todos los dispositivo de una LAN, la dirección es FF:FF:FF:FF:FF:FF.  
+Las de difusión se mandan a los dispositivos que pertenecen a un grupo de multidifusión.  
+
+### Tabla MAC de un switch
+Los switches tienen tablas de direccionamiento en las que guardan las direcciones MAC conectadas a cada puerto.  
+Si una dirección MAC no está en la tabla se hace una busqueda y se añade. Las direcciones se van eliminando de la tabla con el tiempo.  
+
+### Conmutación en un switch
+Métodos de conmutación: almacenamiento y reenvío, de corte(avance rápido o sin fragmentos).  
+Configuración de duplex:  
+Full-duplex: La información puede mandarse y recibirse al mismo tiempo.  
+Semiduplex: La información solo puede mandarse o recibirse en un instante.  
+Autonegociación: Los dos dispositivos negocian la mejor opción.  
+AUTO-MDIX(Medium Dependent Interface): Sirve para poder usar cables de par trenzado directos o cruzados indiscriminadamente.  
+
+
+## Curso 2: Prácticas de Fundamentos de redes
+### Introducción
+Poner en práctica los conocimientos del curso anterior.  
+
+### Práctica 1: Conectividad de la capa física
+Usando el programa Packet Tracer:  
+Identificar las características físicas de cada dispositivo de interconexión de redes.  
+Seleccionar los módulos correctos para proporcionar conectividad.  
+Conectar los dispositivos.  
+Probar la conectividad entre los dispositivos.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/9486c6f1-01dc-4747-88b4-394c3159439f)
+
+### Práctica 2: Subredes con IPv4
+Con Packet Tracer:  
+Diseñar un esquema de subredes IPv4.  
+Configurar los dispositivos de acuerdo a las subredes generadas.  
+Probar la conectividad en la red y solucionar los problemas encontrados.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/499a0a2e-6d8c-4c24-a2bf-28d2e015251d)
+
+### Práctica 3: Diseño de subredes con VLSM
+Con Packet Tracer:  
+Realizar la división en subredes acorde a las especificaciones de número de redes y tamaño de cada red.  
+Asignar direcciones a los equipos de cada subred.  
+Probar la conectividad.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/7ccdce4d-bedc-4b1e-b273-6e29474e967b)
+
+### Práctica 4: Diseño de subredes en papel
+Teniendo las especificaciones de la red, en un archivo de texto:  
+Calcular el esquema de direccionamiento más óptimo.  
+Calcular las direcciones de red, broadcast y rango de direcciones útiles para cada subred.  
+Dada una dirección calcular a qué subred pertenece y la dirección de red y broadcast de dicha subred.  
+
+### Práctica 5: Subredes con IPv6
+En Packet Tracer:  
+Determine las subredes y el esquema de direccionamiento IPv6.  
+Configure el direccionamiento IPv6 en los outers y los Hosts.  
+Verificar la conectividad IPv6.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/647f83f5-38fd-4215-9f07-9fde872909b8)
+
+### Práctica 6: Comunicaciones de capa de transporte
+En Packet Tracer:  
+Generar tráfico de red utilizando el modo simulación.  
+Examinar el funcionamiento de los protocolos TCP y UDP.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/022c740e-ef44-47a6-85eb-93d317f89a99)
+
+
+## Curso 3: Acceso a la red
+### Introducción
+Aspectos relacionados con VLANs, switches y capa 2.  
+
+### Configurar y verificar VLANs
+### ¿Qué es una VLAN?
+Son segmentaciones lógicas en redes físicas de forma que no hacen falta varios dispositivos y conectan distintos dispositivos de la VLAN. Mejor organización y tráfico.  
+Tipos de VLAN: VLAN de datos, VLAN nativa, VLAN de administración, VLAN de voz.  
+Es necesario tener una VLAN separada para voz porque se necesita: retraso inferior a 150ms prioridad, (QoS)Quality of Service, ancho de banda, congestionamiento.  
+Los switches de cisco tienen una VLAN creada de forma predeterminada, la VLAN1. Hay que tener cuidad al configurar las VLANs en el switch.   
+
+### VLANs en entornor conmutados múltiples
+Un enlace de trocal es un enlace entre dos dispositivos de una red que permite el trafico de VLANs.  
+Para diferenciar el trafico de VLAN se añade a la trama un encabezado IEEE 802.1Q.  
+Se debe configurar los dispositivos de forma que un enlace de troncal conecte la misma VLAN.  
+
+### Configuración de VLANs
+Comandos para crear una VLAN:  
+vlan vlan-id  
+name vlan-name  
+end  
+Una vez creada se asigna a una interfaz del switch. Comandos para asignar al puerto:  
+interface interface-id  
+switchport mode access  
+switchport access vlan vlan-id  
+end  
+Para verificar la creación:  
+show vlan [brief | id vlan-id | name vlan-name | summary]  
+show interface vlan vlan_id  
+Cambiar perteneciencia a un puerto:  
+switchport access vlan vlan-id  
+no switchport access vlan  
+
+### Enlaces troncales
+Comandos para configurar un enlace troncal:  
+interface interface-id  
+switchport mode trunk  
+switchport trunk native vlan vlan-id  
+switchport trunk allowed vlan vlan-list  
+end  
+Para verificar: show interfaces interface_id switchport  
+Para restablecer enlace de troncal a modo predeterminado:  
+no switchport trunk allowed vlan  
+no switchport trunk native vlan  
+Para restablecer a puerto de acceso: switchport mode access  
+
+### Protocolo DTP
+DTP(Dynamic Trunking Protocol) es un protocolo propietario de cisco que automatiza ciertas tareas de las VLAN en los switches cisco y determina si se usa un enlace troncal o de acceso.  
+Esta activado por defecto, el valor predeterminado es dynamic-auto, puede desactivarse con switchport nonegotiate y activarse con switchport mode dynamic auto.  
+Se configura con el comando switchport mode y uno de los siguientes modos: acceso, dinámico automático, dinámico deseable, troncal.  
+Verificación: show dtp interface  
+
+### Configurar y verificar conectividad entre switches
+### Concepto del enrutamiento entre VLANs
+Opciones de enrutamiento:  
+Enrutamiento entre VLAN heredado: Un router con varias interfaces conecta cada puerto con el switch de una VLAN.  
+Router-on-a-stick: Se crean subinterfaces en un router mediante la configuración. Es poco eficiente, raramente se usa.  
+Uso de switches de capa 3 (MLS) con interfaces virtuales conmutadas (SVIs): Se crea una interfaz SVI para cada VLAN del switch.  
+
+### Enrutamiento entre VLANs mediante 'Router on a stick'
+Proceso de creación:  
+Crear y nombrar las VLANs.  
+Crear la interfaz de administración.  
+Configurar puertos de acceso.  
+Configurar puertos de enlace troncal.  
+Para verificar se revisca con ICMP y los comandos:
+show ip route  
+show ip interface brief  
+show interfaces  
+show interfaces trunk  
+
+### Enrutamiendo entre VLANs mediante 'MLS'
+Hace falta un conmutador de capa 3, así se hace conmutación en hardware para mayor velocidad.  
+Para la configuración:  
+Crear las VLAN.  
+Crear las interfaces VLAN SVI.  
+Configurar los puertos de acceso.  
+Habilitar el enrutamiento IP.  
+Verificación:  
+show ip route  
+show ip interface brief  
+show interfaces  
+show interfaces trunk  
+
+### Resolución de problemas de enrutamiento entre VLANs
+Falta alguna VLAN: show interface interface-id switchport.  
+Problemas con el puerto troncal del switch: show interface trunk y show running-config interface interface_id.  
+Problemas en los puertos de acceso de switch: show vlan brief, show interface interface_id switchport o show running-config interface interface_id.  
+Configuración incorrecta en el router: show ip interface brief y show interfaces.  
+
+### Configurar y verificar protocolos de descubrimiento de capa 2
+### CDP como protocolo de descubrimiento de capa 2
+CDP(Cisco Discovery Protocol) es un protocolo propietario de cisco de capa 2 usado para recopilar información de los dispositivos del mismo enlace. Se ejecuta en todos los dispositivos cisco. Es un LLDP(Link Layer Discovery Protocol) de capa 2.  
+Está habilitado de forma predeterminada. Para ver la información se usa show cdp. Para desactivarlo se usa no cdp enable, por motivos de seguridad se puede desactivar para no dar información a un atacante, además que un técnico ya sabría la topología de la red, el comando para ver la topología y diseño es show cdp neighbors.  
+
+### LLDP como protocolo de descubrimiento de capa 2
+Es como CDP pero no hace falta usar dispositivos cisco. Puede o no estar habilitado. Para habilitar globalmente lldp run. Para verificar show lldp. Para usarlo show lldp neighbors.  
+
+### Configurar y verificar Etherchannel
+### Conceptos generales de Etherchannel
+Para aumentar el ancho de banda se pueden proporcionar varios enlaces. Para esto hace falta un protocolo que lo permita debido al STP(Spanning Tree Protocol) que bloquea bucles de conmutación.  
+Para esto se usa Etherchannel.  
+
+### PAGP y LACP
+PAGP(Port Aggregation Protocol) sirve para crear enlaces Etherchannel. Modos: encendido, desirable, auto. Dependiendo de los dos dispositivos se establece enlace o no.  
+LACP(Link Aggregation Control Protocol) agrupa varios puertos físicos para hacer uno solo lógico. Modos: encendido, activo, pasivo. Dependiendo de los dos dispositivos se establece el canal o no.  
+
+### Configuración de Etherchannel
+Cosas a tener en cuenta:  
+Soporte de EtherChannel.  
+Velocidad y duplex.  
+Coincidencia de VLANs.  
+Rango de VLANs.  
+
+### Resolución de problemas de Etherchannel
+Comandos para verificar:  
+show interfaces port-channel  
+show etherchannel summary  
+show etherchannel port-channel  
+show interfaces etherchannel  
+Problemas típicos:  
+Los puertos no son de la misma VLAN y no hay enlace troncal.  
+Conexión troncal no configurada en todos los puertos.  
+El rango permitido de VLAN no es el mismo.  
+Opción de negociación dinámica es incompatible.  
+
+### El protocolo STP y sus variantes
+### Funciones de STP
+El protocolo STP previene los bucles que proporcionan redundancia. Si STP no está habilitado se pueden formar bucles de capa 2 que haga que las tramas se progragen infinitamente en bucle por la red.  
+Broadcast storm: Número anormalmente alto de tráfico broadcast que saturan la red.  
+
+### Algoritmo STP
+Crea una topología sin bucles y todos switch determinan una única ruta de menor costo.  
+Método:  
+Selección de un puente raíz.  
+Bloquear de rutas redundantes.  
+Creación de una una topología sin bucles mediante el bloqueo de puertos específicos.  
+Vuelta a calcular en caso de falla de enlace.  
+
+### Elección del puente raiz
+Durante STP los switches utilizan BPDU(Bridge Protocol Data Units) para compartir su información.  
+Así se determina el mejor puente raiz y rutas. El costo está definido por la IEEE.  
+
+### Puertos raíz, designados y alternativos
+Cada switch escogerá entonces un puerto raíz, el cual es el más cercano al enlace raíz.  
+Entre dos switch habrá un puerto designado que tiene el costo de ruta raíz interna para el puente raíz.  
+Si un puerto no es un puerto raíz o un puerto designado, se convierte en un puerto alternativo.  
+Podemos ahora identificar puertos raíz, designados y alternativos.  
+
+### Elegir un puerto raíz a partir de multiples rutas de igual costo
+Criterios:  
+Oferta de remitente más baja.  
+Prioridad de puerto del remitente más baja.  
+ID de puerto del remitente más bajo.  
+
+### Temporizadores y estados de puerto
+STP utiliza tres temporizadores:  
+Temporizador de Hello.  
+Temporizador de demora directa (Forward delay).  
+Temporizador de edad máxima (Max Age).  
+
+### Evolución de STP
+Historia y novedades de STP.  
+
+### PortFast y BPDUGuard
+Cuando un dispositivo se conecta a un switch se espera cada vez que expira el temporizador de retardo de reenvío 15 segundos durante 30 segundos.  
+Si el puerto esta configurado en PortFast se evita el retraso.  
+Los switches de cisco mediante BPDUGuard pueden poner el switch en estado errdisabled al recibir BPDU para protegerse ante bucles. Aunque el administrador tiene que volver a poner manualmente la interfaz de servicio.  
+
+### Arquitecturas inalámbricas de cisco
+### Conceptos generales de tecnologías inalámbricas
+Redes inalámbricas: WPAN, WLAN, WMAN, WWAN.  
+Tecnologías inalámbricas: bluetooth, WIMAX, banda ancha celular, banda ancha satelital.  
+Estandares varios de 802.11.  
+Organizaciones: ITU(International Telecommunication Union), IEEE, Alianza Wifi.  
+
+### Componentes de las WLAN
+NIC inalámbrica, router inalámbrico, AP inalámbrico(autónomos, basados en controlador), antenas(Omnidireccional, direccional, MIMO).  
+
+### Funcionamiento de las WLAN
+Topologías: modo ad hoc, modo de infraestructura(BSS, ESS), tethering.  
+Asociación: descubrir un AP inalámbrico, autenticarse con un AP, asociarse con el AP.  
+Parametros de asociación: SSID, contraseña, modo de red, modo de seguridad, configuraciones de canal.  
+Algoritmo CSMA/CA
+
+### Administración de APs
+CAPWAP permite configurar varios APs medianten un WLC. Usando IPv4 usa el protocolo IP 17 y usando IPv6 usa el protocolo IP 136.
+DTLS es el protocolo de cifrado entre el AP y el WLC.  
+FlexConnect permite la configuración y el control de APs a través de un enlace WAN.  
+
+### Gestión de canales WLAN
+La saturación de canales de radiofrecuencia se puede mitigar con las técnicas DSSS, FHSS, OFDM.  
+Los canales de banda de 2,4GHz tienen 22MHz mientras que los de 5GHz tienen 20MHz de separacion
+
+### Configuración de WLAN de ubicación remota
+En oficinas pequeñas y hogar normalmente se usan routers SOHO que son como una mezcla de router switch y AP inalámbrico.
+Configuración:  
+Configurar el router desde el navegador web.  
+Configurar más aspectos de la red.  
+Si hace falta configurar una red de malla para aumentar el alacance.  
+Configurar el NAT.  
+Configurar QoS.  
+Configurar el reenvio de puertos.  
+
+### Configuración básica en WLC
+Los puntos de acceso ligeros(LAP) no requieren configuración inicial y se usan para comunicarse con el WLC. Es parecido a conectarse a un router mediante el navegador web. Desde ahí hay varias opciones especificas para configurar los APs.  
+
+
+## Curso 4: Prácticas de acceso a la red
+### Intruducción
+Poner en práctica los conocimientos del curso anterior.
+
+### Práctica 1: Implementación de VLANs con Trunking
+Configurar las VLAN.  
+Asignar las VLAN a los puertos.  
+Configurar troncales estáticos.  
+Configurar enlace troncal dinámico.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/62ed79c4-566b-4379-a432-8147ec346f5f)
+
+### Práctica 2: Enrutamiento entre VLANs con Router on a Stick
+Agregar VLAN a un switch.  
+Configurar subinterfaces.  
+Probar la conectividad con entre VLANS.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/3f14d627-6ca4-44e4-aef5-9fc0b95bba97)
+
+### Práctica 3: Enrutamiento entre VLANs con MLS
+Configurar el switching de capa 3.  
+Configurar el routing entre redes VLAN.  
+Configurar el enrutamiento IPv6 entre VLAN.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/f4f910cf-1ecf-4deb-99be-b153b8034d54)
+
+### Práctica 4: Reconocimiento de red con CDP
+Obtener la topología de una red usando CDP y acceso remoto SSH
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/84e9389d-f5ef-4600-a4ae-e48e076a604d)
+
+### Práctica 5: Implementación de Etherchannel
+Configurar los parámetros básicos del switch.  
+Configurar un EtherChannel con PAgP de Cisco.  
+Configurar un EtherChannel LACP 802.3ad.  
+Configurar un enlace EtherChannel redundante.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/61fefab3-f084-4e95-be22-b96ce889b7c6)
+
+### Práctica 6: Verificación de funcionamiento de STP
+Describir el protocolo del árbol de expansión rápida (STP).  
+Explique cómo el protocolo de árbol de expansión evita los bucles de conmutación al tiempo que permite la redundancia en las redes conmutadas.  
+
+### Práctica 7: Configuración de una red inalámbrica
+Conectar a un router inalámbrico.  
+Configurar el router inalámbrico.  
+Conectar un dispositivo cableado al router inalámbrico.  
+Conectar un dispositivo inalámbrico al router inalámbrico.  
+Agregar un AP a la red para ampliar la cobertura inalámbrica.  
+Actualizar la configuración predeterminada del router.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/2e6464fe-a9ca-40d4-878a-cf8f40325810)
+
+### Práctica 8: Configuración de una WLAN básica con WLC
+En este laboratorio estudiaremos algunas de las características de un controlador de la red Inalámbrica.  
+Crearemos una nueva WLAN en el controlador e implementaremos ciertos aspectos de seguridad en esa LAN.  
+Configuraremos un host inalámbrico para conectarse a la nueva.  
+WLAN a través de un AP que esté bajo el control del WLC.  
+Por último, verificaremos que exista conectividad.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/f0e06fde-63c7-4e43-ba83-4b782c5a19f9)
+
+
+## Curso 5: Conectividad IP
+### Introducción
+Routers y enrutamiento.  
+
+### Interpretar los componentes de la tabla de enrutamiento
+### Función de un router
+Un router tiene dos funciones: Enrutar, cuando recibe un paquete IP, determinar que interfaz usar para reenviar. Conmutar, reenviar el paquete a otra red para que llegue a su destino.  
+Un router encuentra la mejor ruta por medio de la tabla de enrutamiento.  
+
+### Determinación de la mejor ruta
+La mejor ruta de la tabla de enrutamiento también se conoce como la coincidencia más larga. En las tablas de enrutamiento hay guardadas direcciones de red y una logitud del prefijo. Para encontrar la mejor ruta se busca que coincidan el mayor número de bits de entre las direcciones de red y la dirección destino del paquete.  
+
+### Genereación de la tabla de rutas
+Orígenes de la direcciones de red:  
+Redes conectadas directamente: Se agregan cuando una interfaz local está configurada con una dirección IP.  
+Redes remotas: Rutas estáticas o protocolos de enrutamiento dinámico(RIP, IGRP, EIGRP u OSPF).  
+Rutas predeterminadas. Se usa cuando no tiene la dirección, puede ser una estática o dinámica.  
+
+### Mecanismo de reenvío de paquetes en un router
+Al reenviar paquetes, un router debe encapsularlos en el tipo de trama adecuado para el enlace de datos de salida de manera eficiente.  
+Existen tres mecanismos:   
+Switching de procesos: Antiguo. La CPU hace coincidir la dirección de destino con una entrada de la tabla de enrutamiento para determinar la salida.  
+Switching rápido: Usa una memoria caché para almacenar la información de siguiente salto.  
+CEF(Cisco Express Forwarding): CEF crea una Base de Información de Reenvío (FIB) y una tabla de adyacencias, la tabla se actualiza solo cuando cambia la estructura de la red, no al recibir paquetes como en los otros.  
+
+### Estructura de la tabla de direccionamiento IPv4
+Las rutas de la tabla tienen estos códigos:  
+L: Dirección asignada a la interfaz del router.  
+C: Red conectada directamente.  
+S: Ruta estática.  
+O, D, B...: Red que se descubre de forma dinámica de otro router con el protocolo de routing OSPF(Open Shortest Path First).  
+Cada entrada de la tabla tiene: origen de ruta, red de destino, distancia administrativa, métrica, siguiente salto, marca horaria, interfaz de salida.  
+Aunque obsoleto, se usa la arquitectura de direccionamiento por clase, hay entradas principales y secundarias.  
+
+### Estructura de la tabla de direccionamiento IPv6
+Comparte con la de IPv los origenes y fuentes de datos.  
+Cada entrada de la tabla tiene: origen de ruta, red de destino, distancia administrativa, métrica, siguiente salto, interfaz de salida.  
+No usa arquitectura de clases.  
+
+### Distancia administrativa
+Una entrada de una ruta puede venir de dos origenes distintos. En este caso, que ruta se escoge.  
+En el IOS de cisco cada ruta tiene un valor de AD(Administrative Distance) que a menor valor mayor confianza.  
+
+### Enrutamiento estático vs Enrutamiento dinámico
+La mayoría de las redes utilizan una combinación de protocolos de enrutamiento dinámico y rutas estáticas.  
+Estático: Ruta predeterminada del ISP, rutas no aprendidas por el protocolo dinamico, cosas del admin, redes internas.  
+Dinámico: Redes escalables, escalabilidad.  
+El enrutamiento estático es más eficiente pero requiere trabajo configurarlo por lo que se usa para tareas simples y redes simples.  
+
+### Protocolos de enrutamiento dinámico
+Un protocolo de enrutamiento sirve para llenar la tabla de enrutamiento.  
+Objetivos del enrutamiento dinámico: Redes remotas, mantener información actualizada, mejor ruta, alternativas.  
+Componentes: estructuras de datos, mensajes del protocolo de enrutamiento, algoritmo de enrutamiento.  
+
+### Métricas de algunos protocolos de enrutamiento dinámico
+La métrica es un valor que se usa para medir la distancia.  
+RIP(Routing Information Protocol): Recuento de saltos a lo largo de la ruta.  
+OSPF(Open Shortest Path First): Ancho de banda acumulado.  
+EIGRP(Enhanced Interior Gateway Routing Protocol): Ancho de banda y retraso.  
+
+### Configurar y verificar el enrutamiento estático IPv4 e IPv6
+### Tipos de rutas estáticas
+
+
 
 
 
