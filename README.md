@@ -688,10 +688,143 @@ EIGRP(Enhanced Interior Gateway Routing Protocol): Ancho de banda y retraso.
 
 ### Configurar y verificar el enrutamiento estático IPv4 e IPv6
 ### Tipos de rutas estáticas
+Tipos: estándar, predeterminada, flotante, resumida.  
+Dependiendo del destino al que enviemos el paquete se denomina una de estas rutas: de siguiente salto, estática conectada directamente, estática totalmente especificada.  
+Comando para configurar IPv4 estática: ip route network-address subnet-mask { ip-address | exit-intf [ip-address]} [distance]  
+Y para IPv6: ipv6 route ipv6-prefix/prefix-length { ipv6-address | exit-intf [ ipv6-address]} [ distance]  
 
+### Configuración de rutas estáticas
+Cuando configuramos rutas estáticas en un router básicamente le indicamos como llegar a ciertas redes. Hay varias formas de hacerlo:  
+Configurar la ruta estática de siguiente salto IPv4/IPv6: Especificamos la IP del siguiente salto para llegar a una red determinada.  
+Configurar de ruta estática conectada directamente IPv4/IPv6: Especificamos la interfaz de salida para llegar a una red conectada directamente.  
+Configurar de ruta estática totalmente especificada IPv4/IPv6: Especificamos tanto la interfaz de salida como la IP del siguiente salto
+Para verificar: show ip route o show ipv6 route  
 
+### Configuración de rutas predeterminadas
+Una ruta predeterminada es una ruta estática que coincide con todos los paquetes por si no se encuentra la red.  
+Comando de ruta estática predeterminada IPv4: ip route 0.0.0.0 0.0.0.0 {ip-address | exit-intf}  
+De IPv6: ipv6 route ::/0 {ipv6-address | exit-intf}  
+Para verificar usar el comando show ip route static y ver que sea 0 la máscara y buscar el * en IPv4.  
 
+### Configuración de rutas flotantes
+Las rutas estáticas flotantes proporcionan una ruta de respaldo a una ruta principal si falla el enlace.  
+Las rutas flotantes tienen que tener más AD que las rutas principales y las rutas estáticas tienen de AD predeterminado 1, pero se puede cambiar.  
+Para verificar: show ip route static  
 
+### Configuración de rutas de host
+Una ruta de host es una dirección IPv4 con una máscara de 32 bits o una dirección IPv6 con una máscara de 128 bits.  
+Se instala una automaticamente al configurar una dirección de interfaz.  
 
+### Cómo un router con rutas estáticas reenvía paquetes
+Se explica un ejemplo de reenvío de paquetes en una topología.  
 
+### Configurar y verficar OSPF monoárea
+### Características de OSPF
+OSPF(Open Shortest Path First) es un protocolo de enrutamiento dinámico de estado de enlace. Sus ventajas son velocidad y escalabilidad. No usa clases si no áreas.  
+Mediante este protocolo los routers se mandan este tipo de paquetes: de saludo, de descripción de la base de datos, de solicitud de estado de enlace, de actualización de estado de enlace, de acuse de recibo de estado de enlace.  
+Estos paquetes actualizan tres bases de datos: de adyacencia(vecinos), de enlace(topología), de reenvío(enrutamiento).  
+Mediante el algoritmo STP se crea la tabla de topología en forma de árbol para calcular rutas.  
+En OSPF un área es un conjunto de routers que comparten LSDB.  
+OSPF monoárea: Solo tiene un área denominada área 0.  
+OSPF multiárea: Se implementa de forma jerárquica, todas las áreas se conectan al área 0. Los routers que conectan areas se denominan ABR(routers fronterizos de área).  
 
+### El router ID
+OSPFv2 se habilita con el comando: global router ospf process-id  
+Router ID es un valor de 32 bits y se utiliza para identificar de forma única un router en un dominio OSPF. Se puede establecer manual(router-id rid) o automático. Aparece en los paquetes OSPF. El router escoge su IPv4 más alta.  
+
+### Redes OSPF punto a punto
+Para configurar los interfaces p2p: network network-address wildcard-mask area area-id  
+La máscara wildcard mask suele ser la inversa de la máscara de subred configurada en un interfaz. Restar a 255.255.255.255 la mascara.  
+Se puede hacer configurando directamente la interfaz: ip ospf process—id area—id  
+
+### Redes OSPF multiacceso (Elección de DR BDR)
+En las redes OSPF multiacceso se escoge un DR(Designated Router) que controla los LSA y un BDR(Backup Designated Router) por si falla el DR, el resto de routers son DROTHER.  
+Para ver las funciones de cada router: show ip ospf interface
+Para ver las relaciones entre los otros routers: show ip ospf neighbor (posibilidades: FULL/DROTHER, FULL/DR, FULL/BDR, 2-WAY/DROTHER)  
+El router con la prioridad de interfaz más alta es el DR y el segundo el BDR. Si las prioridades son iguales se escoge el que tenga la ID más alta.  
+Para controlar la prioridad: ip ospf priority value  
+
+### Configuración detallada de OSPF
+En OSPF se usa el costo como métrica. Costo = ancho de banda de referencia / ancho de banda de la interfaz en bps. Ancho de banda predeterminado $10^8$.  
+Cambiar el ancho de banda predeterminado: auto-cost reference-bandwidth  
+Establecer manualmente el costo: ip ospf cost  
+Para ver el coste: show ip route  
+Intervalo Hello: Los paquetes Hello se transmiten a la dirección multicast 224.0.0.5 (todos los routers OSPF) cada 10 segundos.
+Intervalo Dead: es el período que el router espera para recibir un paquete Hello antes de declarar al vecino como inactivo. Cisco utiliza un intervalo predeterminado de cuatro veces el intervalo Hello.
+Los intervalos se pueden configurar pero deben coincidir.  
+Comandos para intervalos:  
+ip ospf hello-interval segundos  
+ip ospf dead-interval segundos  
+Para verificar adyacencias: show ip ospf neighbor  
+
+### Verificación de funcionamiento de OSPF
+show ip interface brief  
+show ip route  
+show ip ospf neighbor  
+show ip protocols  
+show ip ospf  
+show ip ospf interface  
+show ip ospf neighbor
+Si no se establecen adyacencias comprobar: Máscara de subred, intervalos, tipos de redes, comando network.  
+show ip protocols  
+show ip ospf  
+show ip ospf interface  
+show ip ospf interface brief  
+
+### Protocolos de redundancia de la puerta de enlace
+### Conceptos de FHRP
+FHRP(First-hop redundancy protocol) es un protocolo que proporciona puertas de enlace predeterminadas alternativas en redes conmutadas donde dos o más routers que están conectados a las mismas.  
+Esto es necesario para cuando falle la interfaz del router gateway predeterminado.  
+Para que el gateway no sea el único punto de fallo se implementa un router virtual.  
+
+### El protocolo HSRP
+HSRP(Hot Standby Router Protocol) es un protocolo propietario de cisco que permite evitar la pérdida de acceso externo a la red si falla el router predeterminado.  
+HSRP configura un grupo de routers seleccionando uno de ellos como dispositivo activo y otros como dispositivos de reserva.  
+Se escoge como activo el que tenga la prioridad más alta, en caso de ser iguales el que tenga la IPv4 más alta. Para configurar la prioridad , 0-255, se usa standby priority priority_number.  
+Para forzar un nuevo proceso de elección: standby preempt  
+Estados: inicial, aprender, escuchar, hablar, en espera.  
+
+## Curso 6: Prácticas de conectividad IP
+### Introducción
+Poner en práctica los conocimientos del curso anterior.  
+
+### Práctica 1: Conectividad IP entre dispositivos
+Parte 1:  
+Asignar direcciones IPv4 e IPv6 estáticas a las interfaces de los hosts.  
+Configurar parámetros básicos del router.  
+Configurar el router para el acceso por SSH.  
+Verificar conectividad de red.  
+Parte 2:  
+Recuperar información del hardware y del software del router.  
+Interpretar el resultado de la configuración de inicio.  
+Interpretar el resultado de la tabla de enrutamiento.  
+Verificar el estado de las interfaces.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/32f6425d-692a-464f-b6a3-221599bd9965)
+
+### Práctica 2: Enrutamiento estático y por defecto
+Configurar rutas predeterminadas estáticas flotantes y estáticas IPv4 e IPv6.  
+Configurar rutas estáticas estáticas y flotantes IPv4 e IPv6 a las LAN internas.  
+Configurar rutas de host IPv4 IPv6.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/4b081036-8a62-4832-909b-0337400f0d5e)
+
+### Práctica 3: OSPF P2P y OSPF Multiacceso
+OSPF P2P:  
+Configurar los router IDs.  
+Configurar las redes para el enrutamiento OSPF.  
+Verificar la configuración OSPF. 
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/85a33cb8-bc1d-498f-b98f-be9bac404005)
+
+OSPF Multiacceso:  
+Examinar las funciones cambiantes del DR y el BDR.  
+Modificar la prioridad OSPF y forzar las elecciones.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/29bfe561-fd9a-4708-8233-22844b539806)
+
+### Práctica 4: Enrutamiento OSFP Monoárea
+Implementar OSPFv2 de área única en redes difusión de acceso múltiple y punto a punto.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/15677705-f39d-4d42-a72c-e4a5ae8c1fb0)
+
+### Práctica 5: Configuración de HSRP
+Configurar un router activo HSRP.  
+Configurar un router en espera HSRP.  
+Verificar el funcionamiento de HSRP.  
+![image](https://github.com/javichocou007/trabajoDI/assets/121022101/268d54fa-8d25-4e44-85f4-820655a92710)
